@@ -257,7 +257,7 @@ export default function RoomDetails() {
     try {
       const res = await fetch(`${API_URL}/api/rooms/${room._id}`, {
         method: "DELETE",
-        credentials: true,
+        credentials: "include",
       });
       if (res.ok) {
         toast.success("Room deleted successfully.");
