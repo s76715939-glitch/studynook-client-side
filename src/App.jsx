@@ -371,11 +371,11 @@ function AppContent() {
               </div>
               <div className="flex items-center gap-2 text-xs">
                 <Phone className="w-3.5 h-3.5 text-secondary" />
-                <span>+880 1790-000000</span>
+                <span>+8801772661151</span>
               </div>
               <div className="flex items-center gap-2 text-xs">
                 <MapPin className="w-3.5 h-3.5 text-primary" />
-                <span className="truncate">Central Library Wing, Dhaka</span>
+                <span className="truncate">Uttara, Dhaka</span>
               </div>
             </div>
 
