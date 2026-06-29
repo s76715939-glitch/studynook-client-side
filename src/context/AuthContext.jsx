@@ -10,7 +10,9 @@ export function AuthProvider({ children }) {
   // Fetch current logged-in user on app mount
   const refreshUser = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/auth/me`);
+      const res = await fetch(`${API_URL}/api/auth/me`, {
+        credentials: "include",
+      });
       if (res.ok) {
         const data = await res.json();
         setUser(data.user);
@@ -29,6 +31,7 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     try {
       const res = await fetch(`${API_URL}/api/auth/login`, {
+        credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -52,6 +55,7 @@ export function AuthProvider({ children }) {
   const register = async (userData) => {
     try {
       const res = await fetch(`${API_URL}/api/auth/register`, {
+        credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
@@ -72,6 +76,7 @@ export function AuthProvider({ children }) {
   const loginWithGoogle = async (googleData) => {
     try {
       const res = await fetch(`${API_URL}/api/auth/google`, {
+        credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(googleData),
@@ -92,7 +97,10 @@ export function AuthProvider({ children }) {
 
   const logout = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/auth/logout`, { method: "POST" });
+      const res = await fetch(`${API_URL}/api/auth/logout`, {
+        credentials: "include",
+        method: "POST",
+      });
       if (res.ok) {
         setUser(null);
         toast.success("Successfully logged out. See you soon!");
@@ -107,6 +115,7 @@ export function AuthProvider({ children }) {
   const updateProfile = async (profileData) => {
     try {
       const res = await fetch(`${API_URL}/api/auth/profile`, {
+        credentials: "include",
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(profileData),

@@ -84,7 +84,9 @@ export default function RoomDetails() {
     if (!roomId) return;
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/rooms/${roomId}`);
+      const res = await fetch(`${API_URL}/api/rooms/${roomId}`, {
+        credentials: "include",
+      });
       if (res.ok) {
         const data = await res.json();
         setRoom(data);
@@ -179,6 +181,7 @@ export default function RoomDetails() {
     setBookingSubmitting(true);
     try {
       const res = await fetch(`${API_URL}/api/bookings`, {
+        credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -224,6 +227,7 @@ export default function RoomDetails() {
     setEditSubmitting(true);
     try {
       const res = await fetch(`${API_URL}/api/rooms/${room._id}`, {
+        credentials: "include",
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -256,8 +260,8 @@ export default function RoomDetails() {
   const handleDeleteConfirm = async () => {
     try {
       const res = await fetch(`${API_URL}/api/rooms/${room._id}`, {
-        method: "DELETE",
         credentials: "include",
+        method: "DELETE",
       });
       if (res.ok) {
         toast.success("Room deleted successfully.");

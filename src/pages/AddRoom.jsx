@@ -87,6 +87,7 @@ export default function AddRoom() {
     setSubmitting(true);
     try {
       const res = await fetch(`${API_URL}/api/rooms`, {
+        credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

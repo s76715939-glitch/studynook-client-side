@@ -31,7 +31,9 @@ export default function Login() {
 
         if (!clientId) {
           try {
-            const res = await fetch("/api/auth/google/client-id");
+            const res = await fetch("/api/auth/google/client-id", {
+              credentials: "include",
+            });
             if (res.ok) {
               const data = await res.json();
               clientId = data.clientId;

@@ -3,12 +3,19 @@ import { useAppRouter } from "../context/RouteContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import Loader from "../components/Loader.jsx";
 import { toast } from "sonner";
-import { Plus, ArrowUpRight, HelpCircle, Users, CalendarCheck, Sparkles } from "lucide-react";
+import {
+  Plus,
+  ArrowUpRight,
+  HelpCircle,
+  Users,
+  CalendarCheck,
+  Sparkles,
+} from "lucide-react";
 const API_URL = import.meta.env.VITE_API_URL;
 export default function MyListings() {
   const { navigateTo } = useAppRouter();
   const { user } = useAuth();
-  
+
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +33,9 @@ export default function MyListings() {
       if (!user) return;
       setLoading(true);
       try {
-        const res = await fetch(`${API_URL}/api/rooms`);
+        const res = await fetch(`${API_URL}/api/rooms`, {
+          credentials: "include",
+        });
         if (res.ok) {
           const data = await res.json();
           // Filter listings owned by the current logged in user
@@ -59,7 +68,9 @@ export default function MyListings() {
             My Study Cell Listings
           </h1>
           <p className="text-base-content/70 text-sm font-sans max-w-xl">
-            Audit study traction, append amenities checklist, customize hourly pricing parameters, or register additional whiteboard rooms you handle.
+            Audit study traction, append amenities checklist, customize hourly
+            pricing parameters, or register additional whiteboard rooms you
+            handle.
           </p>
         </div>
 
@@ -84,7 +95,8 @@ export default function MyListings() {
                 No Room Listings Registered
               </h3>
               <p className="text-base-content/75 text-sm font-sans leading-relaxed">
-                You haven't listed any study rooms yet. If you are a student rep, librarian, or private admin, list an available room now!
+                You haven't listed any study rooms yet. If you are a student
+                rep, librarian, or private admin, list an available room now!
               </p>
             </div>
             <button
@@ -128,10 +140,12 @@ export default function MyListings() {
                   {/* Statistics block inside list item */}
                   <div className="grid grid-cols-2 gap-2 p-2.5 bg-base-200 border border-base-300 rounded-xl text-[11px] font-mono font-bold text-base-content/70">
                     <div className="flex items-center gap-1.5">
-                      <Users className="w-3.5 h-3.5 text-primary" /> Cap: {room.capacity}
+                      <Users className="w-3.5 h-3.5 text-primary" /> Cap:{" "}
+                      {room.capacity}
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <CalendarCheck className="w-3.5 h-3.5 text-secondary" /> Booked: {room.bookingCount || 0}
+                      <CalendarCheck className="w-3.5 h-3.5 text-secondary" />{" "}
+                      Booked: {room.bookingCount || 0}
                     </div>
                   </div>
 

@@ -3,7 +3,7 @@ import { useAppRouter } from "../context/RouteContext.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import { toast } from "sonner";
 import { UserPlus, Mail, Lock, User, Image, Sparkles } from "lucide-react";
-
+const API_URL = import.meta.env.VITE_API_URL;
 export default function Register() {
   const { navigateTo } = useAppRouter();
   const { register, loginWithGoogle, user } = useAuth();
@@ -52,7 +52,9 @@ export default function Register() {
 
         if (!clientId) {
           try {
-            const res = await fetch("/api/auth/google/client-id");
+            const res = await fetch(`${API_URL}/api/auth/google/client-id`, {
+              credentials: "include",
+            });
             if (res.ok) {
               const data = await res.json();
               clientId = data.clientId;

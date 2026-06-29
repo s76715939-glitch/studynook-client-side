@@ -37,7 +37,9 @@ export default function MyBookings() {
     if (!user) return;
     setLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/bookings/my`);
+      const res = await fetch(`${API_URL}/api/bookings/my`, {
+        credentials: "include",
+      });
       if (res.ok) {
         const data = await res.json();
         // Sort bookings with confirmed first and descending order of date
@@ -73,6 +75,7 @@ export default function MyBookings() {
       const res = await fetch(
         `${API_URL}/api/bookings/${selectedBooking._id}/cancel`,
         {
+          credentials: "include",
           method: "PATCH",
         },
       );
